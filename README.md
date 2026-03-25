@@ -18,10 +18,10 @@ to deliver a **complete travel experience in seconds**.
 
 Planning a trip is often:
 
-* Time-consuming ⏳
-* Scattered across multiple websites 🌐
-* Difficult to personalize 🎯
-* Confusing for beginners 😵
+* Time-consuming 
+* Scattered across multiple websites 
+* Difficult to personalize 
+* Confusing for beginners 
 
 Users must manually:
 
@@ -167,7 +167,7 @@ Enter your budget (INR): 60000
 
 ---
 
-## 🎯 Example Output
+## Example Output
 
 * Destination: Mumbai
 * Country: India
@@ -225,7 +225,7 @@ Flexibility: This is a suggested itinerary, feel free to adjust it based on your
 ```
 ---
 
-## 💡 Why This Project Stands Out
+##  Why This Project Stands Out
 
 - Combines rule-based systems with AI (LLM) for real-world problem solving  
 - Uses a multi-agent architecture instead of a monolithic design  
