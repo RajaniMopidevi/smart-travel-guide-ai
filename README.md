@@ -1,194 +1,273 @@
-# Smart Travel Guide using Multi-Agent System
+# Smart Travel Guide – AI Powered Multi-Agent System
 
 ## Overview
 
-The **Smart Travel Guide** is a Python-based travel planning assistant that uses a **multi-agent architecture** to automate itinerary creation.
-Instead of manually searching multiple websites for destinations, costs, and activities, the system intelligently generates a **structured travel plan** based on user inputs such as destination, trip duration, budget, and preferences.
+The **Smart Travel Guide** is an AI-powered travel planning system built using a **multi-agent architecture**.
+It automatically generates **detailed, personalized travel itineraries** including places to visit, food recommendations, and daily plans.
 
-The system demonstrates how **AI-inspired multi-agent systems** can simplify real-world tasks like travel planning by delegating responsibilities across specialized agents.
+Unlike traditional travel planners, this system combines:
+
+*  Structured data (for known destinations)
+*  AI generation (for dynamic planning)
+
+to deliver a **complete travel experience in seconds**.
 
 ---
 
-## Problem Statement
+## Problem
 
-Planning a trip usually requires gathering information from multiple sources such as travel blogs, booking platforms, maps, and forums. Travelers must compare destinations, estimate budgets, and design itineraries manually.
+Planning a trip is often:
 
-This process is often:
+* Time-consuming ⏳
+* Scattered across multiple websites 🌐
+* Difficult to personalize 🎯
+* Confusing for beginners 😵
 
-* Time-consuming
-* Confusing for first-time travelers
-* Dependent on multiple scattered resources
-* Difficult to personalize based on budget or interests
+Users must manually:
 
-This project addresses these challenges by creating a **Smart Travel Guide that automates travel planning using multiple collaborating agents.**
+* Research destinations
+* Estimate budgets
+* Plan day-by-day itineraries
 
 ---
 
 ## Solution
 
-The Smart Travel Guide introduces a **multi-agent system** where each agent performs a specialized task.
+This project solves the problem using a **Multi-Agent AI System**.
 
 The system:
 
-* Accepts user inputs such as destination, days, budget, and preferences
-* Retrieves structured destination data when available
-* Uses fallback logic to generate information for unknown destinations
-* Calculates estimated travel budgets
-* Generates personalized day-by-day itineraries
+* Accepts user inputs (destination, days, budget, preferences)
+* Fetches real destination data (if available)
+* Uses AI (Ollama) to generate:
 
-This modular architecture ensures the system remains **scalable, flexible, and easy to extend**.
+  * Real places
+  *  Food recommendations
+  *  Detailed day-wise itinerary
+  * Calculates budget automatically
 
 ---
 
 ## System Architecture
 
-The system follows a **multi-agent workflow**:
-
+```
 User Input
-↓
-Travel Advisor (Orchestrator Agent)
-↓
-Destination Agent → Retrieves or generates destination information
-↓
-Budget Agent → Calculates estimated trip cost
-↓
-Itinerary Agent → Generates personalized day-by-day travel plan
-↓
-Final Travel Plan Output
+   ↓
+Travel Advisor (Main Controller)
+   ↓
+Destination Agent → Gets or generates destination data
+   ↓
+Budget Agent → Calculates trip cost
+   ↓
+Itinerary Agent → AI generates full travel plan
+   ↓
+Final Output (Detailed Travel Plan)
+```
 
 ---
 
-## Agents in the System
+##  Agents Explained
 
-### Destination Agent
+### 🔹 Destination Agent
 
-* Retrieves destination information from a predefined dataset
-* Generates fallback highlights for unknown destinations
-* Ensures the system works for **any city entered by the user**
+* Fetches destination from dataset (`data.py`)
+* Uses AI fallback for unknown locations
+* Ensures system works for **ANY destination worldwide**
 
-### Budget Agent
+---
 
-* Calculates estimated travel cost based on:
+### 🔹 Budget Agent
 
-  * number of travel days
-  * typical cost per day
-  * estimated flight expenses
-* Returns a detailed budget breakdown
+* Calculates:
 
-### Itinerary Agent
+  * Cost per day
+  * Total trip cost
+  * Flight estimates
+  * Returns structured budget breakdown
 
-* Generates a **multi-day itinerary**
-* Uses destination highlights and user preferences
-* Produces personalized travel recommendations
+---
 
-### Travel Advisor (Orchestrator)
+### 🔹 Itinerary Agent (Core AI)
+
+* Uses **Ollama (LLM)** to generate:
+
+  * Full day-wise plans
+  * Morning / Afternoon / Evening schedule
+  * Food & local experiences
+  * Produces **realistic travel plans**
+
+---
+
+### 🔹 Travel Advisor (Orchestrator)
 
 * Coordinates all agents
-* Manages workflow and decision-making
-* Combines outputs into the final travel plan
+* Combines outputs into final result
 
 ---
 
-## Key Features
+##  Key Features
 
-* Multi-agent system design
-* Modular and extensible architecture
-* Session memory for tracking interactions
-* Budget estimation tool
-* Dynamic itinerary generation
-* Fallback logic for unknown destinations
-* Works for **any city entered by the user**
+* Multi-Agent System Design
+* AI-Powered Itinerary Generation (Ollama)
+* Works for ANY destination
+* Includes food & local experiences
+* Budget estimation system
+* Modular & scalable architecture
+* Hybrid system (data + AI)
 
 ---
 
 ## Project Structure
 
 ```
-smart-travel-guide-ai
-│
-├── main.py          # Entry point for running the travel planner
-├── agents.py        # Multi-agent logic
-├── tools.py         # Utility functions (destination lookup, budget)
-├── data.py          # Destination dataset
-├── memory.py        # Session memory handling
-├── requirements.txt # Project dependencies
-└── README.md        # Project documentation
+main.py      → Entry point  
+agents.py    → Multi-agent logic  
+tools.py     → Utilities (budget, data access)  
+data.py      → Destination dataset  
+memory.py    → Session handling  
+
 ```
 
 ---
 
-## Example Usage
+## How to Run
 
-Run the program:
+### 1️ Install dependencies
+
+```
+pip install -r requirements.txt
+```
+
+### 2️ Install Ollama
+
+Download from: https://ollama.com
+
+### 3️ Pull model
+
+```
+ollama pull gemma3:4b
+```
+
+### 4️ Run project
 
 ```
 python main.py
 ```
 
-Example input:
+---
+
+## Example Input
 
 ```
-Enter destination: Paris
-Enter number of days: 4
-Enter travel preference: museums and cafes
-Enter your budget (INR): 90000
-```
-
-Example output:
-
-```
------- Travel Plan ------
-
-Destination: Paris
-Country: Unknown
-
-Estimated Budget:
-20000 INR
-
-Itinerary:
-
-Day 1: Visit Paris Central Market and enjoy museums and cafes.
-Day 2: Visit Paris Old Town and enjoy museums and cafes.
-Day 3: Visit Paris Cultural District and enjoy museums and cafes.
-Day 4: Visit Paris Main Landmark and enjoy museums and cafes.
+Enter destination: Mumbai
+Enter number of days: 5
+Enter travel preference: food, beach, popular markets etc
+Enter your budget (INR): 60000
 ```
 
 ---
 
-## Technologies Used
+## 🎯 Example Output
+
+* Destination: Mumbai
+* Country: India
+* Budget: {'approx_total_inr': 25500, 'breakdown': {'days_cost': 17500, 'flights_estimate': 8000}}
+* Itinerary:
+
+```
+Okay, here's a detailed 5-day travel itinerary for Mumbai, focusing on your specified interests (Gateway of India, Elephanta Caves, Marine Drive, Shree Siddhivinayak Temple, Dhobi Ghat) and incorporating food, beach, markets, and a realistic structure:
+
+Day 1: Gateway to Mumbai & Colonial Charm
+
+Morning (9:00 AM - 1:00 PM): Start at the Gateway of India.  Take plenty of photos, explore the surrounding area, and consider a short boat ride around the harbor (various operators available).
+Afternoon (1:00 PM - 5:00 PM):Lunch at Cafe Leopold (Fort) - a historic and popular spot for Indian and Western cuisine. Afterward, explore Colaba Causeway Market, browsing for clothes, jewelry, souvenirs, and street food.
+Evening (5:00 PM - 9:00 PM):Walk along Marine Drive (the ‘Queen’s Necklace’) – enjoy the sea breeze and city views. Dinner at Trishna (Fort) – known for its delicious seafood, particularly the butter garlic prawns.
+Food:Cafe Leopold, Trishna, Street food at Colaba Causeway (try Pav Bhaji, Vada Pav).
+
+Day 2: Island Adventure & Spiritual Significance
+
+Morning (8:00 AM - 1:00 PM): Take the ferry from Gateway of India to Elephanta Caves. Explore the ancient cave temples dedicated to Lord Shiva. Allow 3-4 hours for the visit, including ferry time. (Ferry departs every 30-60 minutes)
+Afternoon (1:00 PM - 5:00 PM): Lunch at a restaurant near the ferry terminal in Gateway of India – Anthony’s (Continental/Seafood) offers great views.
+Evening (5:00 PM - 9:00 PM): Visit the Shree Siddhivinayak Temple (Prabhadevi) - one of Mumbai's most important Hindu temples.  (Be prepared for crowds). Afterward, explore the nearby Siddhivinayak Temple Market for religious items and snacks.
+Food: Anthony's, Street food snacks at Siddhivinayak Temple Market.
+
+Day 3: Markets & Bollywood Buzz
+
+Morning (9:00 AM - 1:00 PM): Immerse yourself in the vibrant chaos of Crawford Market - a wholesale market with a huge variety of goods (fruits, vegetables, spices, textiles).  Be prepared for a sensory overload!
+Afternoon (1:00 PM - 5:00 PM): Lunch at Cannon Pav Bhaji (Fort) - known for their authentic and delicious Pav Bhaji. Afterwards, explore Matunga, a local area known for its Irani cafes.
+Evening (5:00 PM - 9:00 PM):  Take a Bollywood Studio Tour (book in advance) - get a glimpse into the world of Indian cinema. Dinner at Kyani & Co. (Fort) -  an iconic Irani cafe known for its Berry Punch and savory snacks.
+Food: Cannon Pav Bhaji, Kyani & Co., street food at Crawford Market.
+
+Day 4: Beach Relaxation & Artistic Vibes
+
+Morning (9:00 AM - 1:00 PM): Head to Juhu Beach. Relax on the sand, enjoy the sea breeze, and perhaps try some street food (bhel puri, pani puri).
+Afternoon (1:00 PM - 5:00 PM): Lunch at Gajalee Seafood Restaurant (Juhu) – Popular for its fresh seafood. Afterward, explore the art galleries along Ashoka Road in Bandra.
+Evening (5:00 PM - 9:00 PM): Stroll along Bandra-Worli Sea Link for stunning views, especially at sunset. Dinner at Bajapti Misal (Bandra) - a local favorite for Misal Pav.
+Food: Gajalee, Bajapti Misal.
+
+
+Day 5: Dhobi Ghat & Departure
+
+Morning (9:00 AM - 1:00 PM): Visit the Dhobi Ghat (Perlavala Wadi) - witness the spectacle of laundry being hand-washed and dried along the river. (Respectful photography is key.)
+Afternoon (1:00 PM - 4:00 PM):  Lunch at Burger Singh (Various Locations) - a popular burger chain for a casual meal. Afterwards, do some last-minute souvenir shopping in a market of your choice (Colaba or Crawford).
+Evening (4:00 PM onwards): Depending on your departure time, relax at a cafe or explore a neighborhood you missed.  Head to the airport for your flight.
+Food: Burger Singh, Street Food at your chosen market.
+
+
+Important Notes:
+Transportation: Mumbai has a good local train system, taxis, and auto-rickshaws. Consider using the local trains for shorter distances - it's an experience! Uber/Ola are also readily available.
+Traffic: Mumbai traffic can be extremely heavy, so factor in extra travel time.
+Weather: Mumbai can be hot and humid, especially during the summer months. Pack light, breathable clothing.
+Safety: Be aware of your surroundings and take precautions against petty theft.
+Bookings: Book your Bollywood studio tour and any specific restaurant reservations in advance, especially during peak season.
+Flexibility: This is a suggested itinerary, feel free to adjust it based on your interests and preferences.
+
+```
+---
+
+## 💡 Why This Project Stands Out
+
+- Combines rule-based systems with AI (LLM) for real-world problem solving  
+- Uses a multi-agent architecture instead of a monolithic design  
+- Generates dynamic travel plans for both known and unknown destinations  
+- Produces structured, human-like itineraries including food and experiences  
+- Designed to be scalable and extendable with additional agents  
+
+---
+
+##  Technologies Used
 
 * Python
 * Multi-Agent System Design
-* Modular Software Architecture
-* Rule-Based Logic
-* AI-Inspired Itinerary Generation
+* Ollama (LLM Integration)
+* Prompt Engineering
+* Modular Architecture
 
 ---
 
-## Future Enhancements
+##  Future Enhancements
 
-Possible improvements include:
-
-* Integrating real travel APIs (flight and hotel search)
-* Adding a weather recommendation agent
-* Integrating large language models for advanced itinerary generation
-* Creating a web interface using Streamlit
-* Visualizing itineraries using maps and timelines
+*  Web UI (Streamlit / React)
+*  Hotel & flight integration
+*  Maps & route visualization
+*  Preference-based prioritization
+*  Budget optimization AI
 
 ---
 
-## Learning Outcomes
+##  Learning Outcomes
 
-This project demonstrates practical concepts such as:
-
-* Multi-agent collaboration
-* Modular system design
-* Agent orchestration
-* Tool-based AI workflows
-* Context management using session memory
+* Multi-agent system design
+* AI + rule-based hybrid architecture
+* LLM integration (Ollama)
+* Prompt engineering
+* Modular software design
 
 ---
 
-## Author
+##  Author
 
-Developed as an AI systems project demonstrating how **multi-agent architectures can automate travel planning and decision support tasks.**
+Built as an AI project to demonstrate how **multi-agent systems + LLMs can automate real-world decision making**.
+
+---
+

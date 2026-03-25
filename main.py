@@ -42,4 +42,8 @@ if __name__ == "__main__":
 
     result = travel_advisor(req)
 
-    print(result)
+    print("\nDestination:", result["destination"])
+    print("Country:", result["country"])
+    print(" Budget:", result["budget"])
+    print("\nItinerary:\n")
+    print(result["itinerary"])
